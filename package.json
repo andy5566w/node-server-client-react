@@ -3,19 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.1.2",
+    "@tailwindcss/forms": "^0.3.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "js-cookie": "^2.2.1",
+    "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "PORT=3006 craco start",
+    "build": "craco build && mv build ../server",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": [
@@ -36,6 +41,9 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.3.1"
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "prettier": "2.3.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
