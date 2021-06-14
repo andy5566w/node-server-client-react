@@ -1,8 +1,12 @@
 import Classes from './Signup.module.scss'
 import Input from '../../components/form/input'
 import useInput from '../../hook/use-input'
+import api from '../../api/api'
+import { useState } from 'react'
 
 const Signup = () => {
+  const [err, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const {
     value: password,
     onBlur: onPasswordBlur,
@@ -17,7 +21,7 @@ const Signup = () => {
     onChange: onConfirmPWChange,
     isValid: isConfirmPWValid,
     reset: confirmPWRest,
-  } = useInput((v) => password === confirmPW)
+  } = useInput(() => password === confirmPW)
 
   const {
     value: email,
@@ -35,12 +39,24 @@ const Signup = () => {
     reset: userNameRest,
   } = useInput((v) => v.trim() !== '')
 
-  const onSubmit = (event) => {
-    event.preventDefault()
-    passwordRest()
-    confirmPWRest()
-    emailRest()
-    userNameRest()
+  const onSubmit = async (event) => {
+    try {
+      setIsLoading(true)
+      event.preventDefault()
+      const { success } = await api.post('/api/v1/user', {
+        name: userName,
+        email,
+        password,
+      })
+      if (success) setError(null)
+      passwordRest()
+      confirmPWRest()
+      emailRest()
+      userNameRest()
+    } catch (err) {
+      setError(err.response.data.message)
+    }
+    setIsLoading(false)
   }
   return (
     <section className={Classes.Signup}>
@@ -112,6 +128,12 @@ const Signup = () => {
           </div>
         </div>
       </form>
+      {isLoading && <p>Loading...</p>}
+      {err && (
+        <p className="text-red-500 text-xs italic w-full text-center my-2">
+          {err}
+        </p>
+      )}
     </section>
   )
 }
