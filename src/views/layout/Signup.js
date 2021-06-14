@@ -1,22 +1,8 @@
-import useInput from '../../hook/use-input'
-import api from '../../api/api'
-import Cookies from 'js-cookie'
-import Class from './Login.module.scss'
+import Classes from './Signup.module.scss'
 import Input from '../../components/form/input'
+import useInput from '../../hook/use-input'
 
-const Login = () => {
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    const {
-      data: { token },
-    } = await api.post('/api/v1/user/login', { email, password })
-    if (token) {
-      Cookies.set('token', token)
-    }
-    passwordRest()
-    emailRest()
-  }
-
+const Signup = () => {
   const {
     value: password,
     onBlur: onPasswordBlur,
@@ -32,13 +18,9 @@ const Login = () => {
     isValid: isEmailValid,
     reset: emailRest,
   } = useInput((v) => v.trim() !== '')
-
   return (
-    <section className={Class.login + ' w-full max-w-xs'}>
-      <form
-        onSubmit={onSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      >
+    <section className={Classes.Signup}>
+      <form className="w-full max-w-xl">
         <Input
           label="Email"
           inputType="email"
@@ -61,27 +43,25 @@ const Login = () => {
           onBlur={onPasswordBlur}
           isValid={isPasswordValid}
         />
-        {!isPasswordValid && (
+        {!isEmailValid && (
           <p className="text-red-500 text-xs italic w-full text-center my-2">
             密碼必須超過七位數
           </p>
         )}
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Sign In
-          </button>
-          <a
-            className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#singup"
-          >
-            Forgot Password?
-          </a>
+
+        <div className="md:flex md:items-center">
+          <div className="md:w-1/3"></div>
+          <div className="md:w-2/3">
+            <button
+              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              type="button"
+            >
+              Sign Up
+            </button>
+          </div>
         </div>
       </form>
     </section>
   )
 }
-export default Login
+export default Signup
