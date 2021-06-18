@@ -1,9 +1,12 @@
-// import Login from '../src/views/layout/Login'
-import Signup from './views/layout/Signup'
+// import Login from '../src/pages/layout/Login'
+import Signup from './pages/layout/Signup'
+import Layout from './pages/layout/Layout'
 function App() {
   return (
     <div className="App">
-      <Signup />
+      <Layout>
+        <Signup />
+      </Layout>
     </div>
   )
 }
