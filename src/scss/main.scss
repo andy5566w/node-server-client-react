@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './abstracts/variable';
 @import './abstracts/mixin';
 
 @import './layout/app';
