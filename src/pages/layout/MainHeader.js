@@ -32,7 +32,6 @@ const MainHeader = () => {
     setIsShowLink((c) => !c)
     setIsBurgerClicked((c) => !c)
   }
-  console.log(classes)
   return (
     <header>
       <nav className={classes.nav}>
