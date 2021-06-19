@@ -1,5 +1,6 @@
 import classes from './MainHeader.module.scss'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const links = [
   {
@@ -15,8 +16,8 @@ const links = [
     to: '/work',
   },
   {
-    text: 'Project',
-    to: '/project',
+    text: 'Logout',
+    to: '/logout',
   },
 ]
 
@@ -25,7 +26,9 @@ const MainHeader = () => {
   const [isBurgerClicked, setIsBurgerClicked] = useState(false)
   const liDom = links.map(({ text, to }) => (
     <li key={text}>
-      <a href={to}>{text}</a>
+      <NavLink activeClassName={classes.nav__links_active} to={to}>
+        {text}
+      </NavLink>
     </li>
   ))
   const handleBurgerClicked = () => {

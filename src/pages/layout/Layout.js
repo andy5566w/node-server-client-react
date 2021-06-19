@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom'
 const Layout = (props) => {
   return (
     <Fragment>
-      <MainHeader />
       <BrowserRouter>
+        <MainHeader />
         <main className="container mx-auto">{props.children}</main>
       </BrowserRouter>
     </Fragment>

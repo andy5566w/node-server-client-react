@@ -50,6 +50,10 @@
       font-weight: bold;
       font-size: 1rem;
     }
+
+    &_active {
+      color: #3f3d56 !important;
+    }
   }
 
   &__burger {

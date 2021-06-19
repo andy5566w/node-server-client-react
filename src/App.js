@@ -1,6 +1,7 @@
 import Login from './pages/layout/Login'
 import Signup from './pages/layout/Signup'
 import Layout from './pages/layout/Layout'
+import Home from './pages/layout/Home'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <Signup />
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
           <Route path="*">
             <Redirect to="/login" />

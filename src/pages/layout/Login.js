@@ -3,18 +3,31 @@ import api from '../../api/api'
 import Cookies from 'js-cookie'
 import Class from './Login.module.scss'
 import Input from '../../components/form/input'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { authActions } from '../../store'
 
 const Login = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const onSubmit = async (e) => {
     e.preventDefault()
-    const {
-      data: { token },
-    } = await api.post('/api/v1/user/login', { email, password })
-    if (token) {
-      Cookies.set('token', token)
+    try {
+      const {
+        data: { token, status },
+      } = await api.post('/api/v1/user/login', { email, password })
+      if (token) {
+        Cookies.set('token', token)
+      }
+      if (status) {
+        dispatch(authActions.authorize())
+        history.push('/home')
+      }
+      passwordRest()
+      emailRest()
+    } catch (e) {
+      console.log(e.response)
     }
-    passwordRest()
-    emailRest()
   }
 
   const {
