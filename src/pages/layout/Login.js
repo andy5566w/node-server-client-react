@@ -3,9 +3,10 @@ import api from '../../api/api'
 import Cookies from 'js-cookie'
 import Class from './Login.module.scss'
 import Input from '../../components/form/input'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { authActions } from '../../store'
+import login_icon from '../../assets/images/login.svg'
 
 const Login = () => {
   const history = useHistory()
@@ -48,6 +49,9 @@ const Login = () => {
 
   return (
     <section className={Class.login + ' w-full max-w-xs'}>
+      <div className={Class.icon}>
+        <img className="h-full" src={login_icon} alt={login_icon} />
+      </div>
       <form
         onSubmit={onSubmit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -86,12 +90,12 @@ const Login = () => {
           >
             Sign In
           </button>
-          <a
+          <Link
             className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-            href="#singup"
+            to="/get-password-back"
           >
             Forgot Password?
-          </a>
+          </Link>
         </div>
       </form>
     </section>

@@ -3,6 +3,7 @@ import Input from '../../components/form/input'
 import useInput from '../../hook/use-input'
 import api from '../../api/api'
 import { useState } from 'react'
+import signup_icon from '../../assets/images/signup.svg'
 
 const Signup = () => {
   const [err, setError] = useState(null)
@@ -60,6 +61,9 @@ const Signup = () => {
   }
   return (
     <section className={Classes.Signup}>
+      <div className={Classes.icon}>
+        <img className="h-full" src={signup_icon} alt={signup_icon} />
+      </div>
       <h1 className="block text-gray-500 font-bold text-center mb-5 text-2xl">
         註冊表單
       </h1>
@@ -119,10 +123,7 @@ const Signup = () => {
         <div className="md:flex md:items-center">
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
-            <button
-              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="submit"
-            >
+            <button className="btn-main" type="submit">
               Sign Up
             </button>
           </div>

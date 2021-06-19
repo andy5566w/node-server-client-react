@@ -1,6 +1,14 @@
 .login {
   position: absolute;
   left: 50%;
-  top: 35%;
+  top: 40%;
   transform: translate(-50%, -50%);
+
+  .icon {
+    height: 15rem;
+    padding: 1rem;
+    img {
+      margin: auto;
+    }
+  }
 }

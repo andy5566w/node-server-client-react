@@ -1,4 +1,8 @@
 :root {
-  --main-color: #6c63ff;
+  --main-color: rgba(108, 99, 255, 1);
+  --main-color-hover: rgba(108, 99, 255, 0.7);
   --main-text-color: rgb(226, 226, 226);
+  --main-text-color-hover: #ccc;
+  --mobile-size: 768px;
+  --tablet-size: 1024px;
 }
