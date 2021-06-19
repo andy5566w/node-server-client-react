@@ -1,3 +1,10 @@
 .App {
   height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  @media (max-width: 768px) {
+    overflow: hidden;
+  }
 }

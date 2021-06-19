@@ -1,10 +1,14 @@
 import { Fragment } from 'react'
 import MainHeader from './MainHeader'
+import { BrowserRouter } from 'react-router-dom'
+
 const Layout = (props) => {
   return (
     <Fragment>
       <MainHeader />
-      <main>{props.children}</main>
+      <BrowserRouter>
+        <main className="container mx-auto">{props.children}</main>
+      </BrowserRouter>
     </Fragment>
   )
 }
