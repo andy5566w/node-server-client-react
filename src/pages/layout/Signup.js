@@ -1,7 +1,7 @@
 import Classes from './Signup.module.scss'
 import Input from '../../components/form/input'
 import useInput from '../../hook/use-input'
-import api from '../../api/api'
+import authApi from '../../api/authApi'
 import { useState } from 'react'
 import signup_icon from '../../assets/images/signup.svg'
 
@@ -44,7 +44,7 @@ const Signup = () => {
     try {
       setIsLoading(true)
       event.preventDefault()
-      const { success } = await api.post('/api/v1/user', {
+      const { success } = await authApi.post('/api/v1/user', {
         name: userName,
         email,
         password,
@@ -121,7 +121,7 @@ const Signup = () => {
           </p>
         )}
         <div className="md:flex md:items-center">
-          <div className="md:w-1/3"></div>
+          <div className="md:w-1/3" />
           <div className="md:w-2/3">
             <button className="btn-main" type="submit">
               Sign Up
