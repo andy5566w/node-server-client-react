@@ -35,7 +35,7 @@ const useApi = (requestFunction, startWithPending = false) => {
     },
     [requestFunction]
   )
-  return [sendRequest, ...httpState]
+  return { sendRequest, ...httpState }
 }
 
 export default useApi

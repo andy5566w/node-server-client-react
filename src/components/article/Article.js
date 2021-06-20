@@ -21,7 +21,7 @@ const Article = ({
         <img className="mr-2" src={author_img} alt={author_img} />
         <div className="flex flex-col">
           <b>{author}</b>
-          <i>發佈於{create_date}</i>
+          <i>發佈於{new Date(create_date).toISOString().slice(0, 10)}</i>
         </div>
         <button className="ml-auto focus:outline-none">詳細內容</button>
       </div>
