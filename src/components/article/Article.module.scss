@@ -68,4 +68,12 @@
       box-sizing: content-box;
     }
   }
+
+  &__bottom {
+    background-color: #ffffff;
+    p {
+      margin-left: 1rem;
+      padding: 0.5rem 0;
+    }
+  }
 }

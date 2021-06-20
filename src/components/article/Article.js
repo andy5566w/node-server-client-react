@@ -1,6 +1,14 @@
 import classes from './Article.module.scss'
 import author_img from '../../assets/images/test_author.jpg'
-const Article = ({ title, sub_title, author, create_date, color, tag }) => {
+const Article = ({
+  title,
+  sub_title,
+  author,
+  create_date,
+  color,
+  tag,
+  watch,
+}) => {
   return (
     <div className={classes.Article} style={{ color, backgroundColor: color }}>
       <div data-color={color}>
@@ -16,6 +24,9 @@ const Article = ({ title, sub_title, author, create_date, color, tag }) => {
           <i>發佈於{create_date}</i>
         </div>
         <button className="ml-auto focus:outline-none">詳細內容</button>
+      </div>
+      <div className={classes.Article__bottom}>
+        <p>觀看數：{watch}</p>
       </div>
     </div>
   )
