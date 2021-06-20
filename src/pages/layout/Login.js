@@ -1,5 +1,5 @@
 import useInput from '../../hook/use-input'
-import api from '../../api/api'
+import authApi from '../../api/authApi'
 import Cookies from 'js-cookie'
 import Class from './Login.module.scss'
 import Input from '../../components/form/input'
@@ -16,7 +16,7 @@ const Login = () => {
     try {
       const {
         data: { token, status },
-      } = await api.post('/api/v1/user/login', { email, password })
+      } = await authApi.post('/api/v1/user/login', { email, password })
       if (token) {
         Cookies.set('token', token)
       }
