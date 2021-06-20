@@ -6,13 +6,17 @@
   align-items: center;
 
   &__left {
-    padding: 1rem 13rem;
+    padding: 1rem 2rem;
     flex-grow: 1;
 
     display: flex;
     flex-direction: column;
     @media (max-width: 1024px) {
       padding: 1rem 8rem;
+    }
+
+    button {
+      max-width: 15rem;
     }
   }
 
