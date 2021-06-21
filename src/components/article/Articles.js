@@ -25,6 +25,7 @@ const Articles = () => {
     }) => (
       <Article
         key={id}
+        id={id}
         sub_title={sub_title}
         title={title}
         tag={tag}

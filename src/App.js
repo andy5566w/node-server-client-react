@@ -2,8 +2,9 @@ import Login from './pages/layout/Login'
 import Signup from './pages/layout/Signup'
 import Layout from './pages/layout/Layout'
 import Home from './pages/layout/Home'
+import ArticleListsItem from './components/article/ArticleLists'
 import { Route, Switch, Redirect } from 'react-router-dom'
-
+import Banner from './components/Banner'
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,12 @@ function App() {
             <Signup />
           </Route>
           <Route path="/home">
+            <Banner />
             <Home />
+          </Route>
+          <Route path="/article/:id">
+            <Banner />
+            <ArticleListsItem />
           </Route>
           <Route path="*">
             <Redirect to="/login" />

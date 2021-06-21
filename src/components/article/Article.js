@@ -1,5 +1,6 @@
 import classes from './Article.module.scss'
 import author_img from '../../assets/images/test_author.jpg'
+import { Link } from 'react-router-dom'
 const Article = ({
   title,
   sub_title,
@@ -8,6 +9,7 @@ const Article = ({
   color,
   tag,
   watch,
+  id,
 }) => {
   return (
     <div className={classes.Article} style={{ color, backgroundColor: color }}>
@@ -23,7 +25,9 @@ const Article = ({
           <b>{author}</b>
           <i>發佈於{new Date(create_date).toISOString().slice(0, 10)}</i>
         </div>
-        <button className="ml-auto focus:outline-none">詳細內容</button>
+        <Link to={'/article/' + id} className="ml-auto focus:outline-none">
+          詳細內容
+        </Link>
       </div>
       <div className={classes.Article__bottom}>
         <p>觀看數：{watch}</p>
