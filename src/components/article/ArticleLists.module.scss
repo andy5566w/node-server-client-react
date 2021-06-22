@@ -1,3 +1,32 @@
 .article {
   height: 200vh;
+  padding-left: 2rem;
+  &__header {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &Left {
+      h3 {
+        font-size: 18px;
+        color: #fff;
+      }
+      h4 {
+        color: #fff;
+      }
+      span {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+    }
+
+    &Right {
+      color: #fff;
+      align-self: flex-end;
+    }
+  }
 }
