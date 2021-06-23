@@ -1,0 +1,32 @@
+.ArticleContent {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  animation: jumpUp 0.5s forwards;
+
+  &__content {
+    margin-top: 8rem;
+    background-color: #fff;
+    border-radius: 10px;
+
+    & > div {
+      height: 100vh;
+      overflow-y: scroll;
+    }
+  }
+}
+
+@keyframes jumpUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

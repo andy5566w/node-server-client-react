@@ -34,7 +34,7 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, 350px);
-    & > div {
+    & > button {
       // 380px / 16
       position: relative;
       cursor: pointer;
