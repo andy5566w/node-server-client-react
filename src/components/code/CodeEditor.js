@@ -6,7 +6,7 @@ const CodeEditor = ({ code, readOnly = false }) => {
       width="100%"
       height="400px"
       language="javascript"
-      theme="dark"
+      theme="vs-dark"
       options={{
         readOnly: readOnly,
         wordWrap: 'on',

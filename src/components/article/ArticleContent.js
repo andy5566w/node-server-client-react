@@ -1,10 +1,23 @@
 import classes from './ArticleContent.module.scss'
 import CodeEditor from '../code/CodeEditor'
 
+const types = {
+  code: 'CODE',
+  paragraph: 'PARAGRAPH',
+  header3: 'HEADER3',
+  unorderedList: 'unorderedList',
+  orderedList: 'orderedList',
+}
+
 const test_data = [
   {
-    id: '1',
-    type: 'code',
+    id: Math.random().toString(16).slice(2),
+    type: types.header3,
+    value: '以下為Code',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.code,
     value: `const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 module.exports = function override(config, env) {
   config.plugins.push(new MonacoWebpackPlugin({
@@ -14,36 +27,108 @@ module.exports = function override(config, env) {
 }`,
   },
   {
-    id: '2',
-    type: 'paragraph',
-    value:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium dolorem fuga fugiat, illo illum impedit iste, mollitia nam neque placeat praesentium quisquam quo sunt veniam vitae voluptate. Consectetur ex exercitationem laudantium repudiandae sit. Error esse fugiat illum ipsa optio temporibus, tenetur veniam? Delectus, explicabo porro! Autem molestias optio porro quas velit. Commodi consequatur distinctio, dolore doloribus ea eaque eos illo, magni quas sed totam ullam voluptatum? Aperiam assumenda blanditiis dicta et id, illum inventore iste iure iusto minima minus molestiae necessitatibus numquam placeat quas recusandae sint temporibus totam ullam voluptas? Accusantium culpa illum incidunt perferendis, rerum temporibus tenetur voluptatum! Accusamus adipisci beatae cum ea eius eveniet facere hic incidunt, minima modi neque non placeat provident quo soluta ut veritatis? Ab adipisci aliquid consectetur consequatur doloremque dolorum id, incidunt iste molestiae perferendis praesentium quidem sint soluta! Aut autem deleniti laboriosam, praesentium quidem repudiandae saepe voluptate! A accusamus accusantium animi aperiam deserunt dolor ea eum eveniet facere facilis fuga, hic illum iste laborum magnam maxime modi nam natus nemo nisi nobis obcaecati, odio pariatur perferendis quam qui quis quod recusandae sapiente sed sequi sint sunt tenetur veritatis voluptatem voluptatibus voluptatum. Blanditiis culpa, deleniti deserunt dicta eveniet minus pariatur similique sit ut voluptates. Ab, harum odit praesentium repellendus sapiente veritatis voluptatum. Ab accusantium ad adipisci aliquam aspernatur, assumenda autem, debitis deserunt dolore ducimus ea earum error eum explicabo fuga incidunt maiores maxime natus nemo nihil non nostrum nulla numquam odio odit officia officiis placeat porro quibusdam quos recusandae rem sint soluta tempore ullam ut voluptatem! Ad blanditiis cupiditate delectus dignissimos distinctio doloribus eveniet facere inventore iste, nemo nisi odit officiis quibusdam quod sed sunt tempore vel voluptas? Accusantium, consequatur dolor eaque eos, et eveniet impedit labore minima nam nobis perferendis praesentium quae repellendus? Eligendi eos maiores molestiae repudiandae similique? A cupiditate deserunt est iusto minus obcaecati quasi? Accusantium consectetur culpa cumque enim error excepturi fugit itaque, laboriosam magni maiores, modi nesciunt nihil nulla numquam quaerat quod reprehenderit sapiente. Adipisci eius excepturi fugiat incidunt laborum laudantium magnam, nam omnis perspiciatis quam quasi quis quos rem similique, suscipit unde voluptas voluptatum. Adipisci aliquam architecto aut consequuntur cupiditate deserunt doloremque dolores eum exercitationem hic, ipsa iste laborum laudantium magni, mollitia nam necessitatibus neque nesciunt nisi nostrum obcaecati pariatur provident quam quidem quis quisquam repellendus rerum sed sequi similique, soluta tempore tenetur ullam ut velit veritatis voluptas. Ad autem beatae consequuntur cupiditate, eaque expedita explicabo, in incidunt laudantium molestiae natus nostrum obcaecati omnis quam qui quis quisquam ratione repellendus repudiandae sed tenetur ullam, ut voluptates! Ab aperiam commodi cum dolor ea enim esse explicabo fugiat in libero mollitia natus necessitatibus, nihil nisi optio perferendis provident quasi quia quisquam quo quos reiciendis repudiandae rerum soluta unde veritatis voluptas voluptatum. Autem, consectetur culpa cum delectus expedita libero officia, omnis pariatur, quisquam sapiente soluta ullam! Accusantium aliquid beatae commodi consequuntur culpa delectus dolorem, eligendi ex, fugiat hic id impedit in incidunt iste modi molestiae mollitia natus nulla numquam praesentium quae quisquam, ratione reprehenderit sequi tempore vel veniam veritatis! Amet!',
+    id: Math.random().toString(16).slice(2),
+    type: types.header3,
+    value: '发布-订阅模型设计思路',
   },
   {
-    id: '3',
-    type: 'paragraph',
-    value:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium dolorem fuga fugiat, illo illum impedit iste, mollitia nam neque placeat praesentium quisquam quo sunt veniam vitae voluptate. Consectetur ex exercitationem laudantium repudiandae sit. Error esse fugiat illum ipsa optio temporibus, tenetur veniam? Delectus, explicabo porro! Autem molestias optio porro quas velit. Commodi consequatur distinctio, dolore doloribus ea eaque eos illo, magni quas sed totam ullam voluptatum? Aperiam assumenda blanditiis dicta et id, illum inventore iste iure iusto minima minus molestiae necessitatibus numquam placeat quas recusandae sint temporibus totam ullam voluptas? Accusantium culpa illum incidunt perferendis, rerum temporibus tenetur voluptatum! Accusamus adipisci beatae cum ea eius eveniet facere hic incidunt, minima modi neque non placeat provident quo soluta ut veritatis? Ab adipisci aliquid consectetur consequatur doloremque dolorum id, incidunt iste molestiae perferendis praesentium quidem sint soluta! Aut autem deleniti laboriosam, praesentium quidem repudiandae saepe voluptate! A accusamus accusantium animi aperiam deserunt dolor ea eum eveniet facere facilis fuga, hic illum iste laborum magnam maxime modi nam natus nemo nisi nobis obcaecati, odio pariatur perferendis quam qui quis quod recusandae sapiente sed sequi sint sunt tenetur veritatis voluptatem voluptatibus voluptatum. Blanditiis culpa, deleniti deserunt dicta eveniet minus pariatur similique sit ut voluptates. Ab, harum odit praesentium repellendus sapiente veritatis voluptatum. Ab accusantium ad adipisci aliquam aspernatur, assumenda autem, debitis deserunt dolore ducimus ea earum error eum explicabo fuga incidunt maiores maxime natus nemo nihil non nostrum nulla numquam odio odit officia officiis placeat porro quibusdam quos recusandae rem sint soluta tempore ullam ut voluptatem! Ad blanditiis cupiditate delectus dignissimos distinctio doloribus eveniet facere inventore iste, nemo nisi odit officiis quibusdam quod sed sunt tempore vel voluptas? Accusantium, consequatur dolor eaque eos, et eveniet impedit labore minima nam nobis perferendis praesentium quae repellendus? Eligendi eos maiores molestiae repudiandae similique? A cupiditate deserunt est iusto minus obcaecati quasi? Accusantium consectetur culpa cumque enim error excepturi fugit itaque, laboriosam magni maiores, modi nesciunt nihil nulla numquam quaerat quod reprehenderit sapiente. Adipisci eius excepturi fugiat incidunt laborum laudantium magnam, nam omnis perspiciatis quam quasi quis quos rem similique, suscipit unde voluptas voluptatum. Adipisci aliquam architecto aut consequuntur cupiditate deserunt doloremque dolores eum exercitationem hic, ipsa iste laborum laudantium magni, mollitia nam necessitatibus neque nesciunt nisi nostrum obcaecati pariatur provident quam quidem quis quisquam repellendus rerum sed sequi similique, soluta tempore tenetur ullam ut velit veritatis voluptas. Ad autem beatae consequuntur cupiditate, eaque expedita explicabo, in incidunt laudantium molestiae natus nostrum obcaecati omnis quam qui quis quisquam ratione repellendus repudiandae sed tenetur ullam, ut voluptates! Ab aperiam commodi cum dolor ea enim esse explicabo fugiat in libero mollitia natus necessitatibus, nihil nisi optio perferendis provident quasi quia quisquam quo quos reiciendis repudiandae rerum soluta unde veritatis voluptas voluptatum. Autem, consectetur culpa cum delectus expedita libero officia, omnis pariatur, quisquam sapiente soluta ullam! Accusantium aliquid beatae commodi consequuntur culpa delectus dolorem, eligendi ex, fugiat hic id impedit in incidunt iste modi molestiae mollitia natus nulla numquam praesentium quae quisquam, ratione reprehenderit sequi tempore vel veniam veritatis! Amet!',
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value: '发布订阅模型有两个关键点：事件的监听（订阅）、事件的触发（发布）。',
   },
   {
-    id: '4',
-    type: 'paragraph',
-    value: 'end',
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value:
+      '中央流行疫情指揮中心今天表示，政府自購的莫德納疫苗與美國捐贈250萬劑疫苗的容量不同，每瓶分別為10人與14人份，為避免混淆，6月30日將先配發美國贈送的莫德納疫苗，供7月1日開打。至於政府自購的24萬劑莫德納疫苗，指揮中心發言人莊人祥說，完成檢驗封緘後將先保留。',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value:
+      '政府採購505萬劑莫德納（Moderna）疫苗，目前已陸續到貨15萬與24萬劑，其中24萬劑莫德納疫苗今天完成食藥署檢驗審查程序，今天傍晚將到倉儲進行封緘，完畢即可放行。另美國捐贈250萬劑莫德納疫苗，預計28日完成檢驗封緘。',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value:
+      '中央流行疫情指揮中心發言人莊人祥今天接受媒體電話聯訪表示，因政府採購的莫德納疫苗為每瓶至少10人份，而美國捐贈的莫德納疫苗則為每瓶至少14人份，為避免接種單位混淆，30日將先配美國贈送疫苗，7月1日送抵即可開打，且疫苗數量較多，能及早讓更多人施打。',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value:
+      '台灣向國外爭取新冠肺炎疫苗陸續抵台，先後有日本捐贈124萬劑AZ疫苗、美國捐贈250萬劑莫德納疫苗，接下來政府採購莫德納疫苗還會到貨，中央流行疫情指揮中心決定擴大接種，將公費疫苗1至7類接種對象擴大到10類。最新新冠肺炎疫苗接種名單，將所有孕婦比照75歲以上長者成為第6類接種對象，原訂該類孕婦僅能選擇AZ疫苗，但指揮中心今天再加碼開放第6類孕婦施打莫德納疫苗，預估18萬人受惠。',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.paragraph,
+    value:
+      '衛福部疾病管制署「傳染病防治諮詢會預防接種組」（ACIP）在最新擴大新冠肺炎疫苗接種名單中，決定將18萬名孕婦納入優先接種對象，與75歲以上長者同列於第6類對象。指揮中心發言人莊人祥昨天強調，莫德納疫苗開放至第3類、AZ疫苗開放至第7類對象，若孕婦兼具第1至3類身分，疫苗就可以二擇一。但高雄市市長陳其邁昨天在新冠肺炎疫情應變會議會後記者會宣布，擬最快自23日起讓1到5類孕婦接種莫德納疫苗；對此，莊人祥昨天第一時間回應，一般身分孕婦僅能選擇打AZ疫苗或暫時不打，甚至今天上午全國防疫會議會後記者會，副指揮官陳宗彥重申孕婦只能打AZ疫苗。',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.header3,
+    value: '測試無序',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.unorderedList,
+    value: [
+      'on(): 负责注册事件的监听器，指定事件触发时的回调函数',
+      'emit(): 负责触发事件，可通过传参使其在触发的时候携带数据',
+      'off(): 负责监听器的移除。',
+    ],
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.header3,
+    value: '測試有序',
+  },
+  {
+    id: Math.random().toString(16).slice(2),
+    type: types.orderedList,
+    value: [
+      'on(): 负责注册事件的监听器，指定事件触发时的回调函数',
+      'emit(): 负责触发事件，可通过传参使其在触发的时候携带数据',
+      'off(): 负责监听器的移除。',
+    ],
   },
 ]
 
 const ArticleContent = ({ data, dispatch }) => {
   const handleCloseContent = (e) => {
-    if (e.target.classList.contains(classes.ArticleContent))
+    if (
+      e.target.classList.contains(classes.ArticleContent) ||
+      e.target.classList.contains(classes.closeBtn)
+    )
       dispatch({ type: 'CLOSE_ARTICLE_CONTENT' })
   }
   // const id = data.id
   const content = test_data.map(({ type, value, id }) => {
     switch (type) {
-      case 'code':
+      case types.code:
         return <CodeEditor key={id} code={value} readOnly={true} />
-      case 'paragraph':
+      case types.paragraph:
         return <p key={id}>{value}</p>
+      case types.header3:
+        return <h3 key={id}>{value}</h3>
+      case types.unorderedList:
+        return (
+          <ul key={id}>
+            {value.map((text, index) => (
+              <li key={index}>{text}</li>
+            ))}
+          </ul>
+        )
+      case types.orderedList:
+        return (
+          <ol key={id}>
+            {value.map((text, index) => (
+              <li key={index}>{text}</li>
+            ))}
+          </ol>
+        )
       default:
         return ''
     }
@@ -51,6 +136,7 @@ const ArticleContent = ({ data, dispatch }) => {
   return (
     <div className={classes.ArticleContent} onClick={handleCloseContent}>
       <div className={classes.ArticleContent__content}>
+        <span className={classes.closeBtn}>&#215;</span>
         <h1>header</h1>
         <div className="container mx-auto d-flex flex-col">{content}</div>
       </div>
