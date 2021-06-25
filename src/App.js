@@ -2,6 +2,7 @@ import Login from './pages/layout/Login'
 import Signup from './pages/layout/Signup'
 import Layout from './pages/layout/Layout'
 import Home from './pages/layout/Home'
+import ArticleEditor from './components/article/ArticleEditor'
 import ArticleListsItem from './components/article/ArticleLists'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Banner from './components/Banner'
@@ -26,6 +27,9 @@ function App() {
           <Route path="/article/:id">
             <Banner />
             <ArticleListsItem />
+          </Route>
+          <Route path="/editor">
+            <ArticleEditor />
           </Route>
           <Route path="*">
             <Redirect to="/login" />

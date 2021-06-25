@@ -8,12 +8,8 @@ const links = [
     to: '/home',
   },
   {
-    text: 'About',
-    to: '/about',
-  },
-  {
-    text: 'Work',
-    to: '/work',
+    text: 'Editor',
+    to: '/editor',
   },
   {
     text: 'Logout',
