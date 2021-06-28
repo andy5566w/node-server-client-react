@@ -69,7 +69,6 @@ const SubjectLists = () => {
   }
 
   const subject = subjects.find(({ _id }) => _id === params.id)
-  console.log(subject)
   if (!subject) return <p>未知主題</p>
 
   const onOpenContent = (id) => {
@@ -115,7 +114,10 @@ const SubjectLists = () => {
 
       {articleContent.status === 'open' &&
         ReactDOM.createPortal(
-          <ArticleContent data={articleContent} dispatch={dispatchArticle} />,
+          <ArticleContent
+            article_id={articleContent.id}
+            dispatch={dispatchArticle}
+          />,
           document.getElementById('article-content')
         )}
     </div>
