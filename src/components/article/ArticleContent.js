@@ -1,7 +1,7 @@
 import classes from './ArticleContent.module.scss'
 import CodeEditor from '../code/CodeEditor'
 
-const types = {
+export const types = {
   code: 'CODE',
   paragraph: 'PARAGRAPH',
   header3: 'HEADER3',

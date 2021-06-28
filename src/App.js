@@ -3,7 +3,7 @@ import Signup from './pages/layout/Signup'
 import Layout from './pages/layout/Layout'
 import Home from './pages/layout/Home'
 import ArticleEditor from './components/article/ArticleEditor'
-import ArticleListsItem from './components/article/ArticleLists'
+import ArticleListsItem from './components/article/SubjectLists'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Banner from './components/Banner'
 function App() {

@@ -1,7 +1,7 @@
 .Article {
   --background-color: #fcfeff;
   --text-color: #fcfeff;
-  max-width: 28%;
+  flex-basis: 28%;
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -10,12 +10,12 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 
   @media (max-width: 1024px) {
-    max-width: 45%;
+    flex-basis: 45%;
     margin: 1rem;
   }
 
   @media (max-width: 768px) {
-    max-width: 100%;
+    flex-basis: 100%;
     &:not(:last-child) {
       margin-bottom: 1rem;
     }

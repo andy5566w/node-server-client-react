@@ -2,15 +2,15 @@ import Article from './Article'
 import classes from './Articles.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllArticles } from '../../store/action/Articles-action'
+import { getAllSubjects } from '../../store/action/Subject-action'
 
 const Articles = () => {
   const dispatch = useDispatch()
-  const articles = useSelector(({ articles }) => articles.articles)
+  const subjects = useSelector(({ subjects }) => subjects.subjects)
   useEffect(() => {
-    dispatch(getAllArticles())
+    dispatch(getAllSubjects())
   }, [dispatch])
-  const art = articles.map(
+  const art = subjects.map(
     ({
       title,
       sub_title,
@@ -18,10 +18,9 @@ const Articles = () => {
       author,
       create_date,
       watch,
-      love,
-      article_total,
       _id: id,
       color,
+      articles,
     }) => (
       <Article
         key={id}
@@ -32,9 +31,8 @@ const Articles = () => {
         author={author}
         create_date={create_date}
         watch={watch}
-        love={love}
-        article_total={article_total}
         color={color}
+        articles={articles}
       />
     )
   )

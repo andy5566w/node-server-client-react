@@ -1,6 +1,9 @@
 .App {
   font-family: 'Poppins', sans-serif;
   background-color: #f5f6f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 body {

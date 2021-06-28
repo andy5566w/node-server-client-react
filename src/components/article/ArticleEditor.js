@@ -1,119 +1,58 @@
 import editor_icon from '../../assets/images/editor.svg'
 import classes from './ArticleEditor.module.scss'
-const ArticleEditor = () => {
+import Select from 'react-select'
+import { types } from './ArticleContent'
+import { useReducer } from 'react'
+
+const options = [
+  { value: types.header3, label: '標題1' },
+  { value: types.code, label: '程式碼' },
+  { value: types.paragraph, label: '文章段落' },
+  { value: types.orderedList, label: '有序' },
+  { value: types.unorderedList, label: '無序' },
+]
+
+const init = () => {
+  return {
+    data: [],
+    status: 'empty',
+  }
+}
+
+const dataReducer = (state, action) => {
+  const _data = [...state.data]
+  switch (action.type) {
+    case 'ADD':
+      _data.push(action.payload)
+      return { ...state, status: 'includes', data: _data }
+    case 'REMOVE':
+      const filtered_data = _data.filter(({ id }) => id !== action.id)
+      return {
+        ...state,
+        status: filtered_data.length ? 'includes' : 'empty',
+        data: filtered_data,
+      }
+    default:
+      return { ...state }
+  }
+}
+
+const ArticleEditor = (props) => {
+  const [editorData, dispatch] = useReducer(dataReducer, props, init)
+  console.log(editorData)
+  const handleChange = ({ value }) => {
+    dispatch({
+      type: 'ADD',
+      payload: { type: value, id: Math.random().toString(16).slice(2) },
+    })
+  }
+
   return (
     <div className="container">
       <img className={classes.img} src={editor_icon} alt={editor_icon} />
+
       <form className="w-full px-20 py-5">
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-first-name"
-            >
-              First Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-first-name"
-              type="text"
-              placeholder="Jane"
-            />
-            <p className="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-last-name"
-            >
-              Last Name
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-last-name"
-              type="text"
-              placeholder="Doe"
-            />
-          </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-password"
-            >
-              Password
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-password"
-              type="password"
-              placeholder="******************"
-            />
-            <p className="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-city"
-            >
-              City
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-city"
-              type="text"
-              placeholder="Albuquerque"
-            />
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-state"
-            >
-              State
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>New Mexico</option>
-                <option>Missouri</option>
-                <option>Texas</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-zip"
-            >
-              Zip
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-zip"
-              type="text"
-              placeholder="90210"
-            />
-          </div>
-        </div>
+        <Select options={options} onChange={handleChange} />
       </form>
     </div>
   )
