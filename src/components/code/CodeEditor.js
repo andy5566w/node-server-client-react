@@ -1,8 +1,20 @@
 import MonacoEditor from '@monaco-editor/react'
+import prettier from 'prettier'
+import parser from 'prettier/parser-babel'
+
 const CodeEditor = ({ code, readOnly = false }) => {
+  const formattedCode = prettier
+    .format(code, {
+      parser: 'babel',
+      plugins: [parser],
+      useTabs: false,
+      semi: false,
+      singleQuote: true,
+    })
+    .replace(/\n$/, '')
   return (
     <MonacoEditor
-      value={code}
+      value={formattedCode}
       width="100%"
       height="400px"
       language="javascript"
