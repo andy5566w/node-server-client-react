@@ -27,6 +27,7 @@
     border-radius: 10px;
     color: rgb(96, 98, 102);
     h1,
+    h2,
     h3,
     p,
     ul,
@@ -52,6 +53,11 @@
       font-size: 2.5rem;
     }
 
+    h2 {
+      font-weight: 400;
+      font-size: 1.9rem;
+    }
+
     h3 {
       font-weight: 400;
       font-size: 1.7rem;
@@ -67,6 +73,10 @@
       height: calc(100vh - 8rem - 4.5rem - 3rem);
     }
   }
+}
+
+.highlight {
+  color: red;
 }
 @keyframes jumpUp {
   0% {

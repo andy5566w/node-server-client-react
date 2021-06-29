@@ -6,41 +6,6 @@ import ArticleContent from './ArticleContent'
 import { useReducer } from 'react'
 import ReactDOM from 'react-dom'
 
-// const cards = [
-//   {
-//     id: 1,
-//     title: 'JavaScript 訂閱模式',
-//   },
-//   {
-//     id: 2,
-//     title: 'Java 執行續介紹',
-//   },
-//   {
-//     id: 3,
-//     title: '如何打包一個程式',
-//   },
-//   {
-//     id: 4,
-//     title: '面試人生的心得',
-//   },
-//   {
-//     id: 5,
-//     title: '如何找到一個好的工作',
-//   },
-//   {
-//     id: 6,
-//     title: '幾招教你部署你理想的城市，幾招教你部署你理想的城市',
-//   },
-//   {
-//     id: 7,
-//     title: '我就只是一個測試',
-//   },
-//   {
-//     id: 8,
-//     title: '我就只是一個測試',
-//   },
-// ]
-
 const articleReducer = (state, action) => {
   switch (action.type) {
     case 'OPEN_ARTICLE_CONTENT':
@@ -74,19 +39,23 @@ const SubjectLists = () => {
   const onOpenContent = (id) => {
     dispatchArticle({ id, type: 'OPEN_ARTICLE_CONTENT' })
   }
-
-  const article_cards = subject.articles.map(({ id, title }) => (
-    <button
-      key={id}
-      className="focus:outline-none"
-      onClick={() => onOpenContent(id)}
-    >
-      <div className={classes.dot} style={{ backgroundColor: subject.color }} />
-      <h4>{title}</h4>
-      <i className={classes.comment + ' las la-comment-dots'} />
-      <i className={classes.heart + ' las la-heart'} />
-    </button>
-  ))
+  const article_cards = subject.articles
+    .filter(({ isDelete }) => !isDelete)
+    .map(({ id, title }) => (
+      <button
+        key={id}
+        className="focus:outline-none"
+        onClick={() => onOpenContent(id)}
+      >
+        <div
+          className={classes.dot}
+          style={{ backgroundColor: subject.color }}
+        />
+        <h4>{title}</h4>
+        <i className={classes.comment + ' las la-comment-dots'} />
+        <i className={classes.heart + ' las la-heart'} />
+      </button>
+    ))
 
   return (
     <div className={classes.article}>
@@ -105,7 +74,7 @@ const SubjectLists = () => {
         </div>
       </div>
 
-      {subject.articles.length === 0 && (
+      {(subject.articles.length === 0 || article_cards.length === 0) && (
         <p className={classes.noArticles} style={{ color: subject.color }}>
           此主題正在醞釀新的文章
         </p>
