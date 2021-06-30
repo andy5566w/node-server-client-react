@@ -1,8 +1,8 @@
 import classes from './ArticleContent.module.scss'
-import CodeEditor from '../code/CodeEditor'
 import { useEffect, useState } from 'react'
 import apiArticle from '../../api/articleApi'
 import Loading from '../Loading'
+import Builder from '../form/Builder'
 
 export const types = {
   code: 'code',
@@ -44,42 +44,6 @@ const ArticleContent = ({ article_id, dispatch }) => {
       dispatch({ type: 'CLOSE_ARTICLE_CONTENT' })
   }
 
-  const content = apiContent.map(
-    ({ type, value, id, codeLang = 'javascript' }) => {
-      switch (type) {
-        case types.code:
-          return (
-            <CodeEditor key={id} code={value} lang={codeLang} readOnly={true} />
-          )
-        case types.paragraph:
-          return <p key={id}>{value}</p>
-        case types.header3:
-          return <h3 key={id}>{value}</h3>
-        case types.header2:
-          return <h2 key={id}>{value}</h2>
-        case types.image:
-          return <img className="w-full" src={value} alt={value} />
-        case types.unorderedList:
-          return (
-            <ul key={id}>
-              {value.map((text, index) => (
-                <li key={index}>{text}</li>
-              ))}
-            </ul>
-          )
-        case types.orderedList:
-          return (
-            <ol key={id}>
-              {value.map((text, index) => (
-                <li key={index}>{text}</li>
-              ))}
-            </ol>
-          )
-        default:
-          return ''
-      }
-    }
-  )
   return (
     <div className={classes.ArticleContent} onClick={handleCloseContent}>
       <div className={classes.ArticleContent__content}>
@@ -88,7 +52,7 @@ const ArticleContent = ({ article_id, dispatch }) => {
           <>
             <span className={classes.closeBtn}>&#215;</span>
             <h1>{header}</h1>
-            <div className="container mx-auto d-flex flex-col">{content}</div>
+            <Builder apiContent={apiContent} />
           </>
         )}
       </div>

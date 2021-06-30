@@ -33,7 +33,7 @@ const CodeEditor = ({
   }, [code])
 
   return (
-    <div>
+    <div className="py-5">
       {showButton && (
         <button
           onClick={(e) => {
