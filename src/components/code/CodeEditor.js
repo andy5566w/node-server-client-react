@@ -8,6 +8,7 @@ const CodeEditor = ({
   readOnly = false,
   lang = 'javascript',
   showButton = false,
+  handleChange,
 }) => {
   const [formattedCode, setFormattedCode] = useState()
   const editorRef = useRef()
@@ -46,6 +47,7 @@ const CodeEditor = ({
       )}
       <MonacoEditor
         onMount={mountedMonaco}
+        onChange={handleChange}
         value={formattedCode}
         width="100%"
         height="400px"
