@@ -19,13 +19,16 @@ const builder = ({ apiContent, isEditor = false, handleChangeValue }) => {
       value,
       type: 'MUTATION_VALUE',
     })
-
   let content = apiContent.map(
-    ({ type, value, id, codeLang = 'javascript' }) => {
+    ({ type, value, id, codeLang = 'javascript', transform = {} }) => {
+      const style = transform.y
+        ? { transform: `translateY(${transform.y}px)` }
+        : {}
       switch (type) {
         case types.code:
           return (
             <CodeEditor
+              style={style}
               key={id}
               code={value}
               lang={codeLang}
@@ -46,7 +49,11 @@ const builder = ({ apiContent, isEditor = false, handleChangeValue }) => {
                 onChange={(e) => onChange(e, id)}
               />
             )
-          return <p key={id}>{value}</p>
+          return (
+            <p style={style} key={id}>
+              {value}
+            </p>
+          )
         case types.header3:
           if (isEditor)
             return (
@@ -58,7 +65,11 @@ const builder = ({ apiContent, isEditor = false, handleChangeValue }) => {
                 onChange={(e) => onChange(e, id)}
               />
             )
-          return <h3 key={id}>{value}</h3>
+          return (
+            <h3 style={style} key={id}>
+              {value}
+            </h3>
+          )
         case types.header2:
           if (isEditor)
             return (
@@ -70,9 +81,15 @@ const builder = ({ apiContent, isEditor = false, handleChangeValue }) => {
                 onChange={(e) => onChange(e, id)}
               />
             )
-          return <h2 key={id}>{value}</h2>
+          return (
+            <h2 style={style} key={id}>
+              {value}
+            </h2>
+          )
         case types.image:
-          return <img className="w-full" src={value} alt={value} />
+          return (
+            <img style={style} className="w-full" src={value} alt={value} />
+          )
         case types.unorderedList:
           return (
             <ul key={id}>

@@ -43,7 +43,10 @@ const dataReducer = (state, action) => {
       const index = _data.findIndex(({ id }) => action.id === id)
       if (index !== -1) {
         if (action.value) _data[index].value = action.value
-        if (action.transform) _data[index].transform = action.transform
+        if (action.transform)
+          _data[index].transform = {
+            y: action.transform.y,
+          }
         return { ...state, data: _data }
       } else return { ...state }
     case 'MUTATION_SUBJECT_ID':
