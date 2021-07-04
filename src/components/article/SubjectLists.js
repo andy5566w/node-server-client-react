@@ -5,6 +5,7 @@ import { getAllSubjects } from '../../store/action/Subject-action'
 import ArticleContent from './ArticleContent'
 import { useReducer } from 'react'
 import ReactDOM from 'react-dom'
+import apiArticle from '../../api/articleApi'
 
 const articleReducer = (state, action) => {
   switch (action.type) {
@@ -37,8 +38,18 @@ const SubjectLists = () => {
   const subject = subjects.find(({ _id }) => _id === params.id)
   if (!subject) return <p>未知主題</p>
 
-  const onOpenContent = (id) => {
+  const onOpenContent = (e, id) => {
+    if (e.target.tagName === 'I') return
     dispatchArticle({ id, type: 'OPEN_ARTICLE_CONTENT' })
+  }
+
+  const deleteArticle = async (id) => {
+    const {
+      data: { status },
+    } = await apiArticle.delete('/api/v1/articles/' + id)
+    if (status === 'success') {
+      dispatch(getAllSubjects())
+    }
   }
   const article_cards = subject.articles
     .filter(({ isDelete }) => !isDelete)
@@ -46,7 +57,7 @@ const SubjectLists = () => {
       <button
         key={id}
         className="focus:outline-none"
-        onClick={() => onOpenContent(id)}
+        onClick={(e) => onOpenContent(e, id)}
       >
         <div
           className={classes.dot}
@@ -55,7 +66,12 @@ const SubjectLists = () => {
         <h4>{title}</h4>
         <i className={classes.comment + ' las la-comment-dots'} />
         <i className={classes.heart + ' las la-heart'} />
-        {isAuth && <i className={classes.trashcan + ' las la-trash'} />}
+        {isAuth && (
+          <i
+            onClick={() => deleteArticle(id)}
+            className={classes.trashcan + ' las la-trash'}
+          />
+        )}
       </button>
     ))
 

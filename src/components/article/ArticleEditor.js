@@ -13,8 +13,8 @@ const options = [
   { value: types.header3, label: '標題3' },
   { value: types.code, label: '程式碼' },
   { value: types.paragraph, label: '文章段落' },
-  { value: types.orderedList, label: '有序' },
-  { value: types.unorderedList, label: '無序' },
+  // { value: types.orderedList, label: '有序' },
+  // { value: types.unorderedList, label: '無序' },
 ]
 
 const init = () => {
