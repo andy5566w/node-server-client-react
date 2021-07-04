@@ -4,8 +4,14 @@ import useInput from '../../hook/use-input'
 import authApi from '../../api/authApi'
 import { useState } from 'react'
 import signup_icon from '../../assets/images/signup.svg'
+import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { authenticateState } from '../../store/action/Auth-action'
+import { useDispatch } from 'react-redux'
 
 const Signup = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const [err, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const {
@@ -44,16 +50,27 @@ const Signup = () => {
     try {
       setIsLoading(true)
       event.preventDefault()
-      const { success } = await authApi.post('/api/v1/user', {
+      const {
+        data,
+        data: { status, token },
+      } = await authApi.post('/api/v1/user', {
         name: userName,
         email,
         password,
       })
-      if (success) setError(null)
-      passwordRest()
-      confirmPWRest()
-      emailRest()
-      userNameRest()
+      console.log(data)
+      if (status === 'success') {
+        setError(null)
+        passwordRest()
+        confirmPWRest()
+        emailRest()
+        userNameRest()
+        if (token) {
+          Cookies.set('token', token)
+        }
+        dispatch(authenticateState(data))
+        history.push('/home')
+      }
     } catch (err) {
       setError(err.response.data.message)
     }
