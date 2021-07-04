@@ -5,8 +5,10 @@ import Class from './Login.module.scss'
 import Input from '../../components/form/input'
 import { useHistory, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { authActions } from '../../store'
 import login_icon from '../../assets/images/login.svg'
+import { authenticateState } from '../../store/action/Auth-action'
+import { authActions } from '../../store'
+import { useEffect } from 'react'
 
 const Login = () => {
   const history = useHistory()
@@ -15,21 +17,26 @@ const Login = () => {
     e.preventDefault()
     try {
       const {
+        data,
         data: { token, status },
       } = await authApi.post('/api/v1/user/login', { email, password })
       if (token) {
         Cookies.set('token', token)
       }
       if (status) {
-        dispatch(authActions.authorize())
+        dispatch(authenticateState(data))
         history.push('/home')
       }
       passwordRest()
       emailRest()
     } catch (e) {
-      console.log(e.response)
+      console.log(e)
     }
   }
+
+  useEffect(() => {
+    dispatch(authActions.logout())
+  }, [])
 
   const {
     value: password,

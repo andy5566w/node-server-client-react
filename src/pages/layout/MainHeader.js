@@ -1,25 +1,41 @@
 import classes from './MainHeader.module.scss'
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const links = [
-  {
-    text: 'Home',
-    to: '/home',
-  },
-  {
-    text: 'Editor',
-    to: '/editor',
-  },
-  {
-    text: 'Logout',
-    to: '/logout',
-  },
-]
+let links = []
 
 const MainHeader = () => {
+  const isAuth = useSelector(({ auth }) => auth.isAuth)
   const [isShowLink, setIsShowLink] = useState(false)
   const [isBurgerClicked, setIsBurgerClicked] = useState(false)
+  if (isAuth) {
+    links = [
+      {
+        text: 'Home',
+        to: '/home',
+      },
+      {
+        text: 'Editor',
+        to: '/editor',
+      },
+      {
+        text: 'Logout',
+        to: '/Login',
+      },
+    ]
+  } else {
+    links = [
+      {
+        text: 'Home',
+        to: '/home',
+      },
+      {
+        text: 'Login',
+        to: '/Login',
+      },
+    ]
+  }
   const liDom = links.map(({ text, to }) => (
     <li key={text}>
       <NavLink activeClassName={classes.nav__links_active} to={to}>
@@ -34,9 +50,9 @@ const MainHeader = () => {
   return (
     <header>
       <nav className={classes.nav}>
-        <div className={classes.logo}>
+        <Link className={classes.logo} to="/home">
           <h4>The Nav</h4>
-        </div>
+        </Link>
         <ul
           className={
             classes.nav__links + (isShowLink ? ' ' + classes.active : '')

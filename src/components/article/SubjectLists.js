@@ -25,6 +25,7 @@ const SubjectLists = () => {
   const dispatch = useDispatch()
   const params = useParams()
   const subjects = useSelector((state) => state.subjects.subjects)
+  const isAuth = useSelector(({ auth }) => auth.isAuth)
   const [articleContent, dispatchArticle] = useReducer(articleReducer, {
     id: -1,
     status: 'close',
@@ -54,6 +55,7 @@ const SubjectLists = () => {
         <h4>{title}</h4>
         <i className={classes.comment + ' las la-comment-dots'} />
         <i className={classes.heart + ' las la-heart'} />
+        {isAuth && <i className={classes.trashcan + ' las la-trash'} />}
       </button>
     ))
 
