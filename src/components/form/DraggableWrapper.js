@@ -30,8 +30,8 @@ const DraggableWrapper = (props) => {
     >
       <div>
         <div className="">
-          <i className="handle las la-arrows-alt cursor-pointer" />
-          <i className="las la-trash" onClick={handleDelete} />
+          <i className="handle las la-arrows-alt cursor-pointer mr-2" />
+          <i className="las la-trash cursor-pointer" onClick={handleDelete} />
         </div>
         {props.children}
       </div>
